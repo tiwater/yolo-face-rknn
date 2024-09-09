@@ -52,7 +52,7 @@ Yolo-based face detection model on RK NPU
 
 5. 安装 ultralytics YOLO 库：
    ```bash
-   pip install --index-url https://pypi.org/simple ultralytics
+   pip install --index-url https://pypi.org/simple ultralytics==8.2.69
    ```
 
 6. 下载模型至合适的目录。本项目中使用从 [yolo-face 项目](https://github.com/akanametov/yolo-face) 中下载的 `yolov8n.pt`。
