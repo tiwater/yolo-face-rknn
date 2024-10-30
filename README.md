@@ -102,6 +102,32 @@ Yolo-based face detection model on RK NPU
 
 如果希望通过 ONNX 格式进行模型转换，请在第 7 步时切换到 `main` 分支，并在第 11、12 步时改用 `onnx2rknn.py`。注意：`onnx2rknn.py` 不接收参数，直接通过 `python onnx2rknn.py` 执行。参数请在文件内修改。
 
+## 关于参数
+
+mean_values 和 std_values 是模型在预处理输入图片时用来进行归一化的数据。这些值通常取决于模型在训练时对输入图像进行的归一化方式。因此，为了正确地进行量化，应该使用与模型训练时相同的 mean_values 和 std_values。
+
+### 如何确定 mean_values 和 std_values 的取值
+
+查看模型的预处理要求:
+
+通常，模型的作者会在模型描述或代码库中说明输入数据需要的预处理方式。如果你是在使用开源模型，查看相关文档或代码，找到他们对输入图像进行归一化所使用的均值和标准差。
+
+常见的 mean_values 和 std_values 设定
+以下是几种常见情况：
+
+如果图像输入是 RGB 格式，像素值范围在 [0, 255]:
+
+归一化到 [0, 1]：mean_values=[[0, 0, 0]], std_values=[[255.0, 255.0, 255.0]]
+归一化到 [−1, 1]：mean_values=[[127.5, 127.5, 127.5]], std_values=[[127.5, 127.5, 127.5]]
+
+如果图像输入已经归一化到 [0, 1]:
+
+无归一化，即不做进一步的归一化：mean_values=[[0]], std_values=[[1]]
+
+如果图像输入已经归一化到 [-1, 1]:
+
+标准算⽰化时：mean_values=[[0]], std_values=[[1]]
+
 ## 参考
 
 - 本项目代码基于： [rknn3588-yolov8](http://git.bwbot.org/publish/rknn3588-yolov8)

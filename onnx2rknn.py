@@ -4,7 +4,7 @@ def build_rknn_model(onnx_model_path, quantize=True):
     rknn = RKNN()
 
     print('--> Config model')
-    rknn.config(mean_values=[[127.5, 127.5, 127.5]], std_values=[[128.0, 128.0, 128.0]],
+    rknn.config(mean_values=[[127.5, 127.5, 127.5]], std_values=[[127.5, 127.5, 127.5]],
                 quant_img_RGB2BGR=False,
                 quantized_algorithm='normal', target_platform='rk3588')
     print('done')
